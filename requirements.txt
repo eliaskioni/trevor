@@ -1,4 +1,3 @@
 Flask-Migrate
 flask
 Flask-SQLAlchemy
-mysql-python
