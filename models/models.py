@@ -16,11 +16,17 @@ class Plane(db.Model):
                          nullable=False)
 
 
+relationship_table = db.Table('expertise_technician_table',
+                              db.Column('expertise_id', db.Integer, db.ForeignKey('expertise.id'), nullable=False),
+                              db.Column('technician_id', db.Integer, db.ForeignKey('technician.id'), nullable=False),
+                              db.PrimaryKeyConstraint('expertise_id', 'technician_id'))
+
+
 class Expertise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     plane_model = db.Column(db.Integer, db.ForeignKey('plane_model.id'),
                             nullable=False)
-    technicians = db.relationship('Technician', backref='technicians', lazy=False)
+    technicians = db.relationship('Technician', secondary=relationship_table, backref='technicians' )
 
 
 class Technician(db.Model):

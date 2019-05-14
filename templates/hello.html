@@ -156,31 +156,34 @@
             </div>
             <div class="ui bottom attached active tab segment" data-tab="first">
                 <div class="ui form">
-                    <div class="fields">
-                        <div class="field">
-                            <label>Registration Number</label>
-                            <input type="text" placeholder="First Name">
-                        </div>
-                        <div class="field">
-                            <label>Model</label>
-                            <div class="fields">
-                                <div class="field">
-                                    <select class="ui fluid search dropdown" name="plane-model">
-                                        <option value="">DC-lO</option>
-                                        <option value="1">Boeing - 12</option>
-                                        <option value="2">AirBus 140</option>
-                                    </select>
+                    <form action="{{ url_for('create_plane') }}" method="post">
+                        <div class="fields">
+                            <div class="field">
+                                <label>Registration Number</label>
+                                <input type="text" placeholder="Registration Number" name="reg_number" required>
+                            </div>
+                            <div class="six field">
+                                <label>Model</label>
+                                <div class="fields">
+                                    <div class="field">
+                                        <select class="ui fluid search dropdown" name="plane_model" required>
+                                            <option value="">DC-lO</option>
+                                            {% for plane_model in plane_models %}
+                                                <option value={{ plane_model.id }}>{{ plane_model.model_number }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="field">
+                                <label>Add</label>
+                                <button class="ui active positive button">
+                                    <i class="plane icon"></i>
+                                    Add Plane
+                                </button>
+                            </div>
                         </div>
-                        <div class="field">
-                            <label>Add</label>
-                            <button class="ui active positive button">
-                                <i class="plane icon"></i>
-                                Add Plane
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <table class="ui selectable celled table">
                     <thead>
@@ -191,65 +194,47 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Airbus Super Jambo</td>
-                        <td>A 380 200</td>
-                        <td>
-                            <div class="ui buttons">
-                                <button class="ui violet button">Edit</button>
-                                <div class="or"></div>
-                                <button class="ui negative button">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Concord</td>
-                        <td>Super Speeder</td>
-                        <td>
-                            <div class="ui buttons">
-                                <button class="ui violet button">Edit</button>
-                                <div class="or"></div>
-                                <button class="ui negative button">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>KX-Boeing-200</td>
-                        <td>Boeing 737 Max</td>
-                        <td>
-                            <div class="ui buttons">
-                                <button class="ui violet button">Edit</button>
-                                <div class="or"></div>
-                                <button class="ui negative button">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
+                    {% for plane in planes %}
+                        <tr>
+                            <td>{{ plane.registration_number }}</td>
+                            <td>{{ plane.model_number }}</td>
+                            <td>
+                                <div class="ui buttons">
+                                    <button class="ui violet button">Edit</button>
+                                    <div class="or"></div>
+                                    <button class="ui negative button">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
             <div class="ui bottom attached tab segment" data-tab="second">
                 <div class="ui form">
-                    <div class="fields">
-                        <div class="field">
-                            <label>Model Number</label>
-                            <input type="text" placeholder="First Name">
+                    <form action="{{ url_for('create_plane_model') }}" method="post">
+                        <div class="fields">
+                            <div class="field">
+                                <label>Model Number</label>
+                                <input type="text" placeholder="Model Number" name="model_number">
+                            </div>
+                            <div class="field">
+                                <label>Capacity</label>
+                                <input type="text" placeholder="Capacity" name="capacity">
+                            </div>
+                            <div class="field">
+                                <label>Weight</label>
+                                <input type="text" placeholder="Weight" name="weight">
+                            </div>
+                            <div class="field">
+                                <label>Add</label>
+                                <button class="ui active positive button">
+                                    <i class="plane icon"></i>
+                                    Add Model
+                                </button>
+                            </div>
                         </div>
-                        <div class="field">
-                            <label>Capacity</label>
-                            <input type="text" placeholder="Middle Name">
-                        </div>
-                        <div class="field">
-                            <label>Weight</label>
-                            <input type="text" placeholder="Last Name">
-                        </div>
-                        <div class="field">
-                            <label>Add</label>
-                            <button class="ui active positive button">
-                                <i class="plane icon"></i>
-                                Add Model
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <table class="ui selectable celled table">
                     <thead>
@@ -261,87 +246,67 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>F2A - CL Speed</td>
-                        <td>430 passengers</td>
-                        <td>4000kg</td>
-                        <td>
-                            <div class="ui buttons">
-                                <button class="ui violet button">Edit</button>
-                                <div class="or"></div>
-                                <button class="ui negative button">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>F2A - CL Speed</td>
-                        <td>430 passengers</td>
-                        <td>4000kg</td>
-                        <td>
-                            <div class="ui buttons">
-                                <button class="ui violet button">Edit</button>
-                                <div class="or"></div>
-                                <button class="ui negative button">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>F2A - CL Speed</td>
-                        <td>430 passengers</td>
-                        <td>4000kg</td>
-                        <td>
-                            <div class="ui buttons">
-                                <button class="ui violet button">Edit</button>
-                                <div class="or"></div>
-                                <button class="ui negative button">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
+                    {% for plane_model in plane_models %}
+                        <tr>
+                            <td>{{ plane_model.model_number }}</td>
+                            <td>{{ plane_model.capacity }} passengers</td>
+                            <td>{{ plane_model.weight }} kg</td>
+                            <td>
+                                <div class="ui buttons">
+                                    <button class="ui violet button">Edit</button>
+                                    <div class="or"></div>
+                                    <button class="ui negative button">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
             <div class="ui bottom attached tab segment" data-tab="third">
                 <div class="ui form">
-                    <div class="fields">
-                        <div class="field">
-                            <label>Name</label>
-                            <input type="text" placeholder="Name">
+                    <form action="{{ url_for('create_technician') }}" method="post">
+                        <div class="fields">
+                            <div class="field">
+                                <label>Name</label>
+                                <input type="text" placeholder="Name" name="name">
+                            </div>
+                            <div class="field">
+                                <label>T-Number</label>
+                                <input type="text" placeholder="T-Number" name="t_number">
+                            </div>
+                            <div class="field">
+                                <label>Address</label>
+                                <input type="text" placeholder="Address" name="address">
+                            </div>
+                            <div class="field">
+                                <label>Phone Number</label>
+                                <input type="text" placeholder="Phone Number" name="phone_number">
+                            </div>
+                            <div class="field">
+                                <label>Salary</label>
+                                <input type="text" placeholder="Salary" name="salary">
+                            </div>
+                            <div class="field">
+                                <label>Expertise</label>
+                                <select name="expertise" class="ui fluid dropdown" multiple="">
+                                    <option value="">Expert</option>
+                                    <option value="1">Boeing</option>
+                                    <option value="0">Airbus</option>
+                                    <option value="">Expert</option>
+                                    <option value="1">Boeing</option>
+                                    <option value="0">Airbus</option>
+                                </select>
+                            </div>
+                            <div class=" one field">
+                                <label>Add</label>
+                                <button class="ui active positive small button">
+                                    <i class="plane icon"></i>
+                                    Add Technician
+                                </button>
+                            </div>
                         </div>
-                        <div class="field">
-                            <label>T-Number</label>
-                            <input type="text" placeholder="T-Number">
-                        </div>
-                        <div class="field">
-                            <label>Address</label>
-                            <input type="text" placeholder="Address">
-                        </div>
-                        <div class="field">
-                            <label>Phone Number</label>
-                            <input type="text" placeholder="Phone Number">
-                        </div>
-                        <div class="field">
-                            <label>Salary</label>
-                            <input type="text" placeholder="Salary">
-                        </div>
-                        <div class="field">
-                            <label>Expertise</label>
-                            <select name="expertise" class="ui fluid dropdown" multiple="">
-                                <option value="">Expert</option>
-                                <option value="1">Boeing</option>
-                                <option value="0">Airbus</option>
-                                <option value="">Expert</option>
-                                <option value="1">Boeing</option>
-                                <option value="0">Airbus</option>
-                            </select>
-                        </div>
-                        <div class=" one field">
-                            <label>Add</label>
-                            <button class="ui active positive small button">
-                                <i class="plane icon"></i>
-                                Add Technician
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <table class="ui selectable celled table">
                     <thead>
@@ -356,23 +321,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Elias Kioni</td>
-                        <td>12-EMP</td>
-                        <td>12 Ngong Road</td>
-                        <td>254703787073</td>
-                        <td> KES 86000</td>
+                    {% for technician in technicians %}
+                        <tr>
+                        <td>{{ technician.name }}</td>
+                        <td>{{ technician.technician_number }}</td>
+                        <td>{{ technician.address }}</td>
+                        <td>{{ technician.phone_number }}</td>
+                        <td>{{ technician.salary }}</td>
                         <td>
                             <div class="ui vertical left pointing dropdown link item">
                                 Expert in
                                 <i class="angle double right icon"></i>
                                 <div class="menu">
-                                    <div class="item">Inbox</div>
-                                    <div class="item">Starred</div>
-                                    <div class="item">Sent Mail</div>
-                                    <div class="item">Drafts (143)</div>
-                                    <div class="item">Spam (1009)</div>
-                                    <div class="item">Trash</div>
+                                    <div class="item">Boeing</div>
+                                    <div class="item">AirBus</div>
+                                    <div class="item">Concord</div>
+                                    <div class="item">Jet (143)</div>
+                                    <div class="item">Bombardier</div>
+                                    <div class="item">Sesna</div>
                                 </div>
                             </div>
                         </td>
@@ -384,97 +350,43 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Elias</td>
-                        <td>12-EMP</td>
-                        <td>12 Ngong Road</td>
-                        <td>254703787073</td>
-                        <td> KES 86000</td>
-                        <td>
-                            <div class="ui vertical left pointing dropdown link item">
-                                Expert in
-                                <i class="angle double right icon"></i>
-                                <div class="menu">
-                                    <div class="item">Inbox</div>
-                                    <div class="item">Starred</div>
-                                    <div class="item">Sent Mail</div>
-                                    <div class="item">Drafts (143)</div>
-                                    <div class="item">Spam (1009)</div>
-                                    <div class="item">Trash</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="ui buttons">
-                                <button class="ui violet button">Edit</button>
-                                <div class="or"></div>
-                                <button class="ui negative button">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Elias</td>
-                        <td>12-EMP</td>
-                        <td>12 Ngong Road</td>
-                        <td>254703787073</td>
-                        <td> KES 86000</td>
-                        <td>
-                            <div class="ui vertical left pointing dropdown link item">
-                                Expert in
-                                <i class="angle double right icon"></i>
-                                <div class="menu">
-                                    <div class="item">Inbox</div>
-                                    <div class="item">Starred</div>
-                                    <div class="item">Sent Mail</div>
-                                    <div class="item">Drafts (143)</div>
-                                    <div class="item">Spam (1009)</div>
-                                    <div class="item">Trash</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="ui buttons">
-                                <button class="ui violet button">Edit</button>
-                                <div class="or"></div>
-                                <button class="ui negative button">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
             <div class="ui bottom attached tab segment" data-tab="fourth">
                 <div class="ui form">
-                    <div class="fields">
-                        <div class="field">
-                            <label>Plane Model</label>
-                            <select class="ui fluid search dropdown" name="plane-model">
-                                <option value="">DC-lO</option>
-                                <option value="1">Boeing - 12</option>
-                                <option value="2">AirBus 140</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label>Technicians</label>
-                            <select name="expertise" class="ui fluid dropdown" multiple="">
-                                <option value="">James</option>
-                                <option value="1">Wairimu</option>
-                                <option value="0">Chebet</option>
-                                <option value="">Ngare</option>
-                                <option value="1">Wekesa</option>
-                                <option value="0">Ledama</option>
-                            </select>
-                        </div>
+                    <form action="{{ url_for('create_expert') }}" method="post">
+                        <div class="fields">
+                            <div class="field">
+                                <label>Plane Model</label>
+                                <select class="ui fluid search dropdown" name="plane_model">
+                                    <option value="">DC-lO</option>
+                                    {% for plane_model in plane_models %}
+                                                <option value={{ plane_model.model_number }}>{{ plane_model.model_number }}</option>
+                                            {% endfor %}
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label>Technicians</label>
+                                <select name="technicians" class="ui fluid dropdown" multiple="">
+                                    <option value="">James</option>
+                                    {% for technician in technicians %}
+                                        <option value={{ technician.id }}>{{ technician.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
 
-                        <div class="field">
-                            <label>Add</label>
-                            <button class="ui active positive button">
-                                <i class="plane icon"></i>
-                                Add Expertise
-                            </button>
-                        </div>
+                            <div class="field">
+                                <label>Add</label>
+                                <button class="ui active positive button">
+                                    <i class="plane icon"></i>
+                                    Add Expertise
+                                </button>
+                            </div>
 
-                    </div>
+                        </div>
+                    </form>
                 </div>
                 <table class="ui selectable celled table">
                     <thead>
@@ -492,12 +404,9 @@
                                 Experts
                                 <i class="angle double right icon"></i>
                                 <div class="menu">
-                                    <div class="item">Wairimu</div>
-                                    <div class="item">Chebet</div>
-                                    <div class="item">Ledama</div>
-                                    <div class="item">Wako</div>
-                                    <div class="item">Grace</div>
-                                    <div class="item">Mako</div>
+                                    {% for technician in technicians %}
+                                        <div class="item">{{ technician.name }}</div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </td>
@@ -562,35 +471,37 @@
             </div>
             <div class="ui bottom attached tab segment" data-tab="fifth">
                 <div class="ui form">
-                    <div class="fields">
-                        <div class="field">
-                            <label>E-Number</label>
-                            <input type="text" placeholder="E-Number">
-                        </div>
-                        <div class="field">
-                            <label>last Date of Medical Examination</label>
-                            <input type="text" placeholder="Date">
-                        </div>
+                    <form action="{{ url_for('create_employee') }}" method="post">
+                        <div class="fields">
+                            <div class="field">
+                                <label>E-Number</label>
+                                <input type="text" placeholder="E-Number" name="e_number">
+                            </div>
+                            <div class="field">
+                                <label>last Date of Medical Examination</label>
+                                <input type="text" placeholder="Date" name="date_of_medical_check">
+                            </div>
 
-                        <div class="field">
-                            <label>Union</label>
-                            <select name="expertise" class="ui fluid dropdown">
-                                <option value="">Farewell</option>
-                                <option value="1">Pilots</option>
-                                <option value="0">Mothers</option>
-                                <option value="">Christians</option>
-                            </select>
-                        </div>
+                            <div class="field">
+                                <label>Union</label>
+                                <select name="union" class="ui fluid dropdown">
+                                    <option value="">Farewell</option>
+                                    <option value="1">Pilots</option>
+                                    <option value="0">Mothers</option>
+                                    <option value="">Christians</option>
+                                </select>
+                            </div>
 
-                        <div class="field">
-                            <label>Add</label>
-                            <button class="ui active positive button">
-                                <i class="plane icon"></i>
-                                Add Traffic Controller
-                            </button>
-                        </div>
+                            <div class="field">
+                                <label>Add</label>
+                                <button class="ui active positive button">
+                                    <i class="plane icon"></i>
+                                    Add Traffic Controller
+                                </button>
+                            </div>
 
-                    </div>
+                        </div>
+                    </form>
                 </div>
                 <table class="ui selectable celled table">
                     <thead>
@@ -663,7 +574,7 @@
 
                         <div class="field">
                             <label>Union</label>
-                            <select name="expertise" class="ui fluid dropdown">
+                            <select name="union" class="ui fluid dropdown">
                                 <option value="">Farewell</option>
                                 <option value="1">Pilots</option>
                                 <option value="0">Mothers</option>
@@ -734,30 +645,36 @@
             </div>
             <div class="ui bottom attached tab segment" data-tab="seventh">
                 <div class="ui form">
-                    <div class="fields">
-                        <div class="field">
-                            <label>KAA Test Number</label>
-                            <input type="text" placeholder="KAA Test Number">
-                        </div>
-                        <div class="field">
-                            <label>Name</label>
-                            <input type="text" placeholder="Date">
-                        </div>
+                    <form action="{{ url_for('create_kaa_test') }}" method="post">
+                        <div class="fields">
+                            <div class="field">
+                                <label>KAA Test Number</label>
+                                <input type="text" placeholder="KAA Test Number" name="kaa_test_number">
+                            </div>
+                            <div class="field">
+                                <label>Name</label>
+                                <input type="text" placeholder="Date" name="name">
+                            </div>
 
-                        <div class="field">
-                            <label>Score</label>
-                            <input type="text" placeholder="Maximum possible score">
-                        </div>
+                            <div class="field">
+                                <label>Score</label>
+                                <input type="text" placeholder="Maximum possible score" name="score">
+                            </div>
+                            <div class="field">
+                                <label>Hours</label>
+                                <input type="text" placeholder="Hours" name="hours">
+                            </div>
 
-                        <div class="field">
-                            <label>Add</label>
-                            <button class="ui active positive button">
-                                <i class="plane icon"></i>
-                                Add KAA Test
-                            </button>
-                        </div>
+                            <div class="field">
+                                <label>Add</label>
+                                <button class="ui active positive button">
+                                    <i class="plane icon"></i>
+                                    Add KAA Test
+                                </button>
+                            </div>
 
-                    </div>
+                        </div>
+                    </form>
                 </div>
                 <table class="ui selectable celled table">
                     <thead>
@@ -765,6 +682,7 @@
                         <th>KAA Test Number</th>
                         <th>Name</th>
                         <th>Score</th>
+                        <th>Hours</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -777,6 +695,7 @@
                         <td>
                             78 %
                         </td>
+                        <td>4</td>
                         <td>
                             <div class="ui buttons">
                                 <button class="ui violet button">Edit</button>
@@ -793,6 +712,7 @@
                         <td>
                             78 %
                         </td>
+                        <td>4</td>
                         <td>
                             <div class="ui buttons">
                                 <button class="ui violet button">Edit</button>
@@ -809,6 +729,7 @@
                         <td>
                             78 %
                         </td>
+                        <td>4</td>
                         <td>
                             <div class="ui buttons">
                                 <button class="ui violet button">Edit</button>
